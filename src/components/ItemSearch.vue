@@ -1,41 +1,65 @@
 <template>
   <v-app>
-    <v-toolbar dark color="teal" style="position: fixed; z-index: 3; width: 100%">
-    <v-toolbar-title>検索</v-toolbar-title>
-    <input
-      v-model="keyword"
-      :loading="loading"
-      cache-items
-      class="mx-4"
-      flat
-      hide-no-data
-      hide-details
-      label="What do you want to eat?"
-      solo-inverted
-      style="width:90%;height: 50px; border-radius: 4px; background-color: aliceblue;"
+    <v-toolbar
+      dark
+      color="teal"
+      style="position: fixed; z-index: 3; width: 100%"
     >
-    <v-btn @click="ClickToCancel">キャンセル</v-btn>
-  </v-toolbar>
-  <div style="display:flex; flex-wrap: wrap;"  class="my-12">
-    <v-card v-for="item in filteredItems" :key="item.id"  max-width="374" style="margin:50px;">
-      <template slot="progress">
-        <v-progress-linear color="deep-purple" height="10" indeterminate ></v-progress-linear>
-      </template>
-      <v-img height="250" :src="item.imagePath"></v-img>
-      <v-card-title>{{ item.name }}</v-card-title>
-      <v-card-text>
-        <div class="my-4 text-subtitle-1">¥{{ item.price }}</div>
-        <div>{{ item.description }}</div>
-      </v-card-text>
-      <v-divider class="mx-4"></v-divider>
-      <v-card-actions>
-        <v-btn class="ma-2" depressed color="primary" outlined text @click="showItemDetail(item.id)">
-          詳細
-        </v-btn>
-      </v-card-actions>
-    </v-card>
-  </div>
-</v-app>
+      <v-toolbar-title>検索</v-toolbar-title>
+      <input
+        v-model="keyword"
+        cache-items
+        class="mx-4"
+        flat
+        hide-no-data
+        hide-details
+        label="What do you want to eat?"
+        solo-inverted
+        style="
+          width: 90%;
+          height: 50px;
+          border-radius: 4px;
+          background-color: aliceblue;
+        "
+      />
+      <v-btn @click="ClickToCancel">キャンセル</v-btn>
+    </v-toolbar>
+    <div style="display: flex; flex-wrap: wrap" class="my-12">
+      <v-card
+        v-for="item in filteredItems"
+        :key="item.id"
+        max-width="374"
+        style="margin: 50px"
+      >
+        <template slot="progress">
+          <v-progress-linear
+            color="deep-purple"
+            height="10"
+            indeterminate
+          ></v-progress-linear>
+        </template>
+        <v-img height="250" :src="item.imagePath"></v-img>
+        <v-card-title>{{ item.name }}</v-card-title>
+        <v-card-text>
+          <div class="my-4 text-subtitle-1">¥{{ item.price }}</div>
+          <div>{{ item.description }}</div>
+        </v-card-text>
+        <v-divider class="mx-4"></v-divider>
+        <v-card-actions>
+          <v-btn
+            class="ma-2"
+            depressed
+            color="primary"
+            outlined
+            text
+            @click="showItemDetail(item.id)"
+          >
+            詳細
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </div>
+  </v-app>
 </template>
 
 <script>

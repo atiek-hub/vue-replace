@@ -103,7 +103,7 @@ export default {
       .then((querySnapshot) =>
         querySnapshot.forEach((doc) => this.toppings.push(doc.data()))
       );
-    console.log(this.toppings);
+    // console.log(this.toppings);
   },
 };
 </script>

@@ -23,7 +23,7 @@
             name="phoneNumber"
             :rules="{
               required: true,
-              regex: '^(71|72|74|76|81|82|84|85|86|87|88|89)\\d{5}$',
+              regex: '^0[789]0-[0-9]{4}-[0-9]{4}|^0([0-9]-[0-9]{4}|[0-9]{2}-[0-9]{3}|[0-9]{3}-[0-9]{2}|[0-9]{4}-[0-9])-[0-9]{4}$',
             }"
           >
             <v-text-field
@@ -171,14 +171,13 @@ export default {
     registerUser() {
       projectAuth
         .createUserWithEmailAndPassword(this.email, this.password)
-        .then((result) => {
+        .then((result) => {//authからuserを取得し、その中のuidをstoreに追加する処理
+          // console.log("result",result)
           const user = result.user;
           if (user) {
             const uid = user.uid;
             const userInitialData = {
-              customer_id: "",
               role: "customer",
-              payment_method_id: "",
               uid: uid,
               name: this.name,
               email: this.email,
@@ -203,7 +202,7 @@ export default {
       this.$refs.observer.reset();
     },
     fetchAddress() {
-      fetch(`https://zipcloud.ibsnet.co.jp/api/search?zipcode=${this.zipcode}`)
+      fetch(`https://zipcloud.ibsnet.co.jp/api/search?zipcode=${this.zipcode}`)//住所自動取得の処理
         .then((res) => res.json())
         .then((data) => {
           const results =
