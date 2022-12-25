@@ -80,7 +80,7 @@ export default {
       });
     },
 
-    onClickConfirm() {
+    onClickConfirm() {//ボタン押下時にログアウトだとログイン画面に遷移し、登録されている場合、注文確定画面位遷移する。
       projectAuth.onAuthStateChanged((user) => {
         if (!user) {
           this.$router.push("/login-view");
@@ -99,10 +99,10 @@ export default {
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          this.cartInItems.push({ ...doc.data(), id: doc.id }); //既にidがあったらidが上書きされる
+          this.cartInItems.push({ ...doc.data(), id: doc.id }); //dataの中身を展開しcartInItemsに入るitemのidを追加する。そうすることでidによって削除することができる。既にidがあったらidが上書きされる
           this.totalOrderPrice += doc.data().totalprice;
         });
-        // console.log(this.cartInItems)
+        console.log(this.cartInItems)
       })
       .then(() => {
         if (this.cartInItems.length === 0) {
