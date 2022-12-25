@@ -81,8 +81,7 @@ export default {
         // console.log("aaa",item.id,item.name);
 
         if (
-          item.name.toLowerCase().indexOf(this.keyword) !== -1
-          //   item.email.indexOf(this.keyword) !== -1
+          item.name.toLowerCase().indexOf(this.keyword) !== -1 //指定された値が最初に現れたindexを返す。値がない場合、-1を返す
         ) {
           resultItems.push(item);
         }
